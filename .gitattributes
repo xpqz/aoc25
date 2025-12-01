@@ -2,4 +2,4 @@
 * text=auto eol=lf
 
 # Set linguist language to APL for .apl files
-*.apl linguist-language=APL
+*.apl? linguist-language=APL
