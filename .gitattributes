@@ -1,0 +1,5 @@
+# Set line endings to LF for all files
+* text=auto eol=lf
+
+# Set linguist language to APL for .apl files
+*.apl linguist-language=APL
