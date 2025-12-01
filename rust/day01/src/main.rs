@@ -39,7 +39,7 @@ fn main() {
             .map(|x| (acc + x * n.signum()) % 100)
             .filter(|&x| x == 0)
             .count();
-        ((acc + n) % 100, r + zeros)
+        (acc + n, r + zeros)
     });
 
     println!("Part 2: {:#?}", r);
