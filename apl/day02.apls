@@ -1,0 +1,13 @@
+#!/usr/local/bin/dyalogscript
+⎕FR ⎕PP←1287 34
+'iotag'⎕CY'dfns'
+data←⊃⌽'-,'⎕VFI⊃⊃⎕NGET'../d/2'1
+p1←{d←10⊥⍣¯1⊢⍵⋄0≠2|≢d:0⋄(2÷⍨≢d)(↑≡↓)d}
+p2←{v←10⊥⍣¯1⊢⍵⋄1=≢v:0⋄∨/{1=≢∪v⊂⍨∊⊂⍨(≢v)⍴⍵↑1}¨⍳⌈2÷⍨≢v}
+m←iotag/(2÷⍨≢data)2⍴data
+⎕←+/∊(/⌿[(p1¨¨m)⋄m]) ⍝ part 1
+⎕←+/(∊p2¨¨m)/∊m ⍝ part2
+
+
+
+
