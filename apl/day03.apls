@@ -1,0 +1,35 @@
+#!/usr/local/bin/dyalogscript
+⎕FR ⎕PP ⎕IO←1287 34 0
+
+data ← {⎕D⍳⍕⍵}¨⊃⎕NGET '../d/3'1
+
+p1 ← {
+    g←⍒⍵
+    a←⍵⊃⍨⊃g
+    (⊃g)=¯1+≢⍵:10⊥(⍵⊃⍨1⊃g⋄a)
+    10⊥(a⋄⍵⊃⍨g⊃⍨⊃⍸⊃⍛<g)
+}
+
+⎕←+⌿p1¨data
+
+⍝⍝ p2, smart, fast by Aaron Hsu.
+
+data ← ↑⊃⎕NGET '../d/3'1
+p2←{
+    digs←⍺
+    p←⍒⍤1⊢x←⎕D⍳⍵
+    low←(≢x)⍴0
+    high←(≢x)⍴(≢⍉x)-⍺-1
+    co←(≢x)⍴⍺-1
+    s←0
+    s⊣{
+        j←⍵⌷⍤¯1⊢p
+        i←⍸m←(co≥0)∧(low≤j)∧j<high
+        s+←(10*co[i])+.×x[i,¨pi←j[i]]
+        co[i]-←1 ⋄ low[i]←pi+1
+        high[i]+←1
+        (~m)×⍵+(co≥0)∧~m
+    }⍣{co∧.=¯1}(≢x)⍴0
+}
+
+⎕←12 p2 data
