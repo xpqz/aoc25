@@ -1,0 +1,8 @@
+#!/usr/local/bin/dyalogscript
+⎕FR ⎕PP ⎕IO←1287 34 0
+(r c) ← (×≢¨d)⊆d←⊃⎕NGET'../d/5'1
+(lo hi) ← ↓⍉{⍵[⍋⍵[;0];]}↑{1⊃'-'⎕VFI ⍵}¨r
+cands ← ⍎¨c
+g ← +\lo>0,¯1↓⌈\hi
+(mlo mhi) ← (⊃¨g⊆lo)(⌈/¨g⊆hi)
+⎕←(+/∨/(cands∘.≥mlo)∧cands∘.≤mhi)(+/1+mhi-mlo)
