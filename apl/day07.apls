@@ -1,0 +1,28 @@
+#!/usr/local/bin/dyalogscript
+⎕FR ⎕PP ⎕IO←1287 34 0
+
+data ← ↑⊃⎕NGET'../d/7'1
+
+y x←⍴data
+s←⊃⍸'S'=∊1↑data
+beam ← 1@s⊢x⍴0
+paths ← 1@s⊢x⍴0
+splitters ← '^'=data
+splits ← 0
+    
+day07 ← {
+    m ← ⍵⌷splitters
+    sp ← beam∧m
+    c ← paths×m
+    splits +← +/sp
+    beam ∧← ~m
+    beam ∨← (1↓sp),0
+    beam ∨← 0,¯1↓sp
+    paths +← (1↓c),0
+    paths +← 0,¯1↓c
+    paths ×← ~m
+    ⍵+1
+}
+    
+_←day07⍣y⊢0
+⎕←(splits⋄+/paths)

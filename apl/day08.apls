@@ -1,0 +1,28 @@
+#!/usr/local/bin/dyalogscript
+
+⍝ From a solution by Aaron Hsu
+
+⎕FR ⎕PP ⎕IO←1287 34 0
+
+f ← {
+    ⍝ Adjacency matrix, one edge at a time
+    ⍝ For each connection in i until we're done, check if already connected.
+    ⍝ Else set the connection and compute connected components using ∨.∧∘⍉⍨⍣≡
+    x←i[j∘←j+1]
+    ∨⌿conn[x]:⍵+1
+    conn[x,⊂⌽⊃x]←1
+    conn∘←∨.∧∘⍉⍨⍣≡conn ⍝ Update any connected components
+    ⍵+1
+}
+
+data ← ⎕CSV'../d/8'⍬4
+
+lines ← 1000
+dist ← 0.5*⍨data+.(×⍨-)⍉data
+i ← ⍸~∨⍀conn←∘.=⍨⍳≢data     ⍝ triangular matrix
+i ← i[⍋dist[i]]             ⍝ edges ordered by ascending length
+j ← ¯1                      ⍝ index into i for edge being processed
+_ ← f⍣{⍺≥lines}⊢0
+⎕ ← ×⌿3↑{⍵[⍒⍵]}+/∪conn ⍝ part 1
+_ ← f⍣{∧⌿conn[0;]}⊢0
+⎕ ← ×⌿data[j⊃i;0]      ⍝ part 2
