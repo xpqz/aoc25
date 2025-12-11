@@ -1,3 +1,11 @@
+"""
+Direct re-implementation of @pitr's solution:
+
+    https://github.com/pitr/aoc/blob/main/2025/11.apl
+
+
+"""
+
 import numpy as np
 import re
 
